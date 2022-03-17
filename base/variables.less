@@ -1,0 +1,47 @@
+/* Screen sizes */
+@screen-sizes: {
+    @xs: {
+        name: xs;
+        font-base: 12;
+        screen-min: undefined;
+        screen-max: @sm[screen-min] - 1;
+    }
+    @sm: {
+        name: sm;
+        font-base: 13;
+        screen-min: 768px;
+        screen-max: @md[screen-min] - 1;
+    }
+    @md: {
+        name: md;
+        font-base: 15;
+        screen-min: 992px;
+        screen-max: @lg[screen-min] - 1;
+    }
+    @lg: {
+        name: lg;
+        font-base: 15;
+        screen-min: 1280px;
+    }
+}
+
+.build-cols(@size, @i: 1) when (@i <= 12) {
+    .col-@{size}-@{i} {
+        flex-basis: 100% * @i / 12;
+        max-width: 100% * @i / 12;
+    }
+
+    .build-cols(@size, @i + 1);
+}
+
+each(@screen-sizes, {
+    & when not (@value[screen-min] = undefined) {
+        @media only screen and (min-width: @value[screen-min]) {
+            .build-cols(@value[name]);
+        }
+    }
+
+    & when (@value[screen-min] = undefined) {
+        .build-cols(@value[name]);
+    }
+});

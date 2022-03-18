@@ -1,47 +1,24 @@
 /* Screen sizes */
-@screen-sizes: {
-    @xs: {
-        name: xs;
-        font-base: 12;
-        screen-min: undefined;
-        screen-max: @sm[screen-min] - 1;
-    }
-    @sm: {
-        name: sm;
-        font-base: 13;
-        screen-min: 768px;
-        screen-max: @md[screen-min] - 1;
-    }
-    @md: {
-        name: md;
-        font-base: 15;
-        screen-min: 992px;
-        screen-max: @lg[screen-min] - 1;
-    }
-    @lg: {
-        name: lg;
-        font-base: 15;
-        screen-min: 1280px;
-    }
-}
+@xs-min: 480px;
+@sm-min: 768px;
+@md-min: 992px;
+@lg-min: 1280px;
 
-.build-cols(@size, @i: 1) when (@i <= 12) {
-    .col-@{size}-@{i} {
-        flex-basis: 100% * @i / 12;
-        max-width: 100% * @i / 12;
-    }
+@xs-max: @sm-min - 1px;
+@sm-max: @md-min - 1px;
+@md-max: @lg-min - 1px;
 
-    .build-cols(@size, @i + 1);
-}
+/* Media queries */
+@xsmall: ~'screen only and (min-width: @{xs-min})';
+@small: ~'screen only and (min-width: @{sm-min})';
+@medium: ~'screen only and (min-width: @{md-min})';
+@large: ~'screen only and (min-width: @{lg-min})';
 
-each(@screen-sizes, {
-    & when not (@value[screen-min] = undefined) {
-        @media only screen and (min-width: @value[screen-min]) {
-            .build-cols(@value[name]);
-        }
-    }
+@xsmall-max: ~'screen only and (min-width: @{xs-max})';
+@small-max: ~'screen only and (min-width: @{sm-max})';
+@medium-max: ~'screen only and (min-width: @{md-max})';
 
-    & when (@value[screen-min] = undefined) {
-        .build-cols(@value[name]);
-    }
-});
+@xsmall-only: ~'screen only and (min-width: @{xs-min}) and (max-width: @{xs-max})';
+@small-only: ~'screen only and (min-width: @{sm-min}) and (max-width: @{sm-max})';
+@medium-only: ~'screen only and (min-width: @{md-min}) and (max-width: @{md-max})';
+@large-only: @large;

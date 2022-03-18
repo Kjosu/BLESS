@@ -1,0 +1,27 @@
+/* Variables */
+@columns: 12;
+
+/* Usage */
+.build-cols(xs);
+
+@media @small {
+    .build-cols(sm);
+}
+
+@media @medium {
+    .build-cols(md);
+}
+
+@media @large {
+    .build-cols(lg);
+}
+
+/* Functions */
+.build-cols(@prefix, @i: 1) when (@i <= @columns) {
+    .col-@{prefix}-@{i} {
+        flex-basis: 100% * @i / 12;
+        max-width: 100% * @i / 12;
+    }
+
+    .build-cols(@prefix, @i + 1);
+}

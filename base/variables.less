@@ -1,0 +1,30 @@
+/* Screen sizes */
+@xs-min: 480px;
+@sm-min: 768px;
+@md-min: 992px;
+@lg-min: 1280px;
+
+@xs-max: @sm-min - 1px;
+@sm-max: @md-min - 1px;
+@md-max: @lg-min - 1px;
+
+/* Media queries */
+@xsmall: ~'screen only and (min-width: @{xs-min})';
+@small: ~'screen only and (min-width: @{sm-min})';
+@medium: ~'screen only and (min-width: @{md-min})';
+@large: ~'screen only and (min-width: @{lg-min})';
+
+@xsmall-max: ~'screen only and (min-width: @{xs-max})';
+@small-max: ~'screen only and (min-width: @{sm-max})';
+@medium-max: ~'screen only and (min-width: @{md-max})';
+
+@xsmall-only: ~'screen only and (min-width: @{xs-min}) and (max-width: @{xs-max})';
+@small-only: ~'screen only and (min-width: @{sm-min}) and (max-width: @{sm-max})';
+@medium-only: ~'screen only and (min-width: @{md-min}) and (max-width: @{md-max})';
+@large-only: @large;
+
+/* Grid */
+@columns: 12;
+
+/* Spacing */
+@spacings: 0, 0.5, 1, 2, 4;

@@ -19,8 +19,12 @@
 /* Functions */
 .build-cols(@prefix, @i: 1) when (@i <= @columns) {
     .col-@{prefix}-@{i} {
-        flex-basis: 100% * @i / 12;
-        max-width: 100% * @i / 12;
+        flex-basis: 100% / @columns * @i;
+        max-width: 100% / @columns * @i;
+    }
+
+    .col-@{prefix}-offset-@{i} {
+        margin-left: 100% / @columns * @i;
     }
 
     .build-cols(@prefix, @i + 1);

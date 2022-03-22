@@ -9,18 +9,18 @@
 @md-max: @lg-min - 1px;
 
 /* Media queries */
-@xsmall: ~'screen only and (min-width: @{xs-min})';
-@small: ~'screen only and (min-width: @{sm-min})';
-@medium: ~'screen only and (min-width: @{md-min})';
-@large: ~'screen only and (min-width: @{lg-min})';
+@xsmall: ~'only screen and (min-width: @{xs-min})';
+@small: ~'only screen and (min-width: @{sm-min})';
+@medium: ~'only screen and (min-width: @{md-min})';
+@large: ~'only screen and (min-width: @{lg-min})';
 
-@xsmall-max: ~'screen only and (min-width: @{xs-max})';
-@small-max: ~'screen only and (min-width: @{sm-max})';
-@medium-max: ~'screen only and (min-width: @{md-max})';
+@xsmall-max: ~'only screen and (min-width: @{xs-max})';
+@small-max: ~'only screen and (min-width: @{sm-max})';
+@medium-max: ~'only screen and (min-width: @{md-max})';
 
-@xsmall-only: ~'screen only and (min-width: @{xs-min}) and (max-width: @{xs-max})';
-@small-only: ~'screen only and (min-width: @{sm-min}) and (max-width: @{sm-max})';
-@medium-only: ~'screen only and (min-width: @{md-min}) and (max-width: @{md-max})';
+@xsmall-only: ~'only screen and (min-width: @{xs-min}) and (max-width: @{xs-max})';
+@small-only: ~'only screen and (min-width: @{sm-min}) and (max-width: @{sm-max})';
+@medium-only: ~'only screen and (min-width: @{md-min}) and (max-width: @{md-max})';
 @large-only: @large;
 
 /* Grid */

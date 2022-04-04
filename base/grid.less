@@ -22,6 +22,7 @@
 /* Functions */
 .build-cols(@prefix, @i: 1) when (@i <= @columns) {
     @size: (100% / @columns * @i);
+
     .col-@{prefix}-@{i} {
         flex-basis: @size;
         max-width: @size;

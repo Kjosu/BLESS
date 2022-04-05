@@ -26,3 +26,26 @@ h4 {
 h5 {
 	font-size: 1.4rem;
 }
+
+.build-font-sizes(xs);
+
+@media @small {
+    .build-font-sizes(sm);
+}
+
+@media @medium {
+    .build-font-sizes(md);
+}
+
+@media @large {
+    .build-font-sizes(lg);
+}
+
+/* Functions */
+.build-font-sizes(@prefix) {
+    each(@font-sizes, {
+        @selectorValue: replace(~'@{value}', '\.', '_');
+
+        .fs-@{prefix}-@{selectorValue}  { font-size: ~'@{value}rem'; }
+    });
+}

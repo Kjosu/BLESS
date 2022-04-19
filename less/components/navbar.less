@@ -1,0 +1,23 @@
+.navbar {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100vw;
+	height: @navbar-height;
+	background: lighten(@background-dark, 5%);
+	border-bottom: 1px solid darken(@background-dark, 2%);
+}
+
+.navbar__title {
+	margin-left: 1.5rem;
+	font-size: 1.8rem;
+	color: white;
+}
+
+.navbar__items {
+	display: flex;
+	margin-left: auto;
+}

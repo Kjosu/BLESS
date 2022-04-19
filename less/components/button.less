@@ -1,0 +1,45 @@
+.bless-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    background: #4E944F;
+    color: #f4f4f4;
+
+    &:disabled {
+        cursor: default;
+        color: #f4f4f4;
+    }
+
+    &__label {
+        text-align: center;
+    }
+
+    &__icon {
+        margin-right: 0.8rem;
+    }
+}
+
+.bless-button--is-loading {
+    justify-content: center;
+    background: #83BD75;
+
+    .bless-button__icon {
+        margin-right: 0;
+        animation: loading-spinner 1s infinite linear;
+    }
+}
+
+@keyframes loading-spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

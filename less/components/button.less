@@ -11,9 +11,17 @@
     background: #4E944F;
     color: #f4f4f4;
 
+    &:hover {
+        background: lighten(#4E944F, 5%);
+    }
+
+    &:active:hover {
+        background: darken(#4E944F, 10%);
+    }
+
     &:disabled {
         cursor: default;
-        color: #f4f4f4;
+        background: lighten(#4E944F, 20%);
     }
 
     &__label {
@@ -27,7 +35,6 @@
 
 .bless-button--is-loading {
     justify-content: center;
-    background: #83BD75;
 
     .bless-button__icon {
         margin-right: 0;

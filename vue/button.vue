@@ -21,8 +21,9 @@ export default {
             default: 'fas'
         },
         icon: String,
-        iconModifiers: String,
-        isLoading: Boolean
+        iconModifier: String,
+        isLoading: Boolean,
+        type: String
     },
     emits: ['click'],
     computed: {
@@ -36,12 +37,18 @@ export default {
             return this.isLinked ? 'a' : 'button';
         },
         rootClasses() {
-            return {
+            const classes = {
                 'bless-button--is-loading': this.isLoading
             };
+            
+            if(this.type) {
+                classes[`bless-button--${this.type}`] = true;
+            }
+
+            return classes;
         },
         iconClasses() {
-            return [this.iconType, this.iconModifiers, this.isLoading ? 'fa-spinner' : this.icon];
+            return [this.iconType, this.iconModifier, this.isLoading ? 'fa-spinner' : this.icon];
         },
         showLabel() {
             return this.label && !this.isLoading;

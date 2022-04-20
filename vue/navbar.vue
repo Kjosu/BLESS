@@ -2,6 +2,7 @@
     <div class="navbar">
         <div class="navbar__title">
             BLESS
+            <span class="subtext p-xs-0_5">a beautiful less framework</span>
         </div>
         <div class="navbar__items fill-v">
             <bless-button

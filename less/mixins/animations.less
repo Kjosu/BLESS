@@ -1,4 +1,5 @@
 .mx-anim-right-to-left(@defaultColor: @color-primary, @hoverColor: @color-secondary) {
+    position: relative;
     background: @defaultColor;
 
     &:before {
@@ -11,7 +12,7 @@
         background: @hoverColor;
         z-index: -1;
         transform: rotate(0deg);
-        transition: all 0.2s ease;
+        transition: all @transition-duration ease;
     }
 
     &:hover {
@@ -24,6 +25,7 @@
 }
 
 .mx-anim-left-to-right(@defaultColor: @color-primary, @hoverColor: @color-secondary) {
+    position: relative;
     background: @defaultColor;
 
     &:before {
@@ -36,7 +38,7 @@
         background: @hoverColor;
         z-index: -1;
         transform: rotate(0deg);
-        transition: all 0.2s ease;
+        transition: all @transition-duration ease;
     }
 
     &:hover {

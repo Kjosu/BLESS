@@ -38,9 +38,10 @@ export default {
         },
         rootClasses() {
             const classes = {
-                'bless-button--is-loading': this.isLoading
+                'bless-button--is-loading': this.isLoading,
+                'bless-button--icon-only': this.iconOnly
             };
-            
+
             if(this.type) {
                 classes[`bless-button--${this.type}`] = true;
             }
@@ -55,6 +56,9 @@ export default {
         },
         showIcon() {
             return this.icon || this.isLoading;
+        },
+        iconOnly() {
+            return this.showIcon && !this.showLabel;
         }
     },
     methods: {

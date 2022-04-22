@@ -1,5 +1,7 @@
+/* Block */
 .bless-button {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     padding: 1rem;
@@ -9,12 +11,30 @@
     cursor: pointer;
     text-decoration: none;
     font-size: 0.9rem;
-    background: #4E944F;
+    background: @color-primary;
     color: #f4f4f4;
+    z-index: 1;
+    overflow: hidden;
+
+    &:before {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 100%;
+        background: @color-secondary;
+        z-index: -1;
+        transform: rotate(0deg);
+        transition: all 0.2s ease;
+    }
 
     &:hover {
         text-decoration: none;
-        background: lighten(#4E944F, 5%);
+
+        &:before {
+            left: 0;
+        }
     }
 
     &:active:hover {
@@ -25,17 +45,21 @@
         cursor: default;
         background: lighten(#4E944F, 20%);
     }
+}
 
-    &--nav {
-        background: lighten(@color-neutral, 5%);
-    }
+/* Elements */
+.bless-button__label {
+    text-align: center;
+}
 
-    &__label {
-        text-align: center;
-    }
+.bless-button__icon {
+    margin-right: 0.8rem;
+}
 
-    &__icon {
-        margin-right: 0.8rem;
+/* Modifiers */
+.bless-button--icon-only {
+    .bless-button__icon {
+        margin-right: 0;
     }
 }
 
@@ -48,6 +72,11 @@
     }
 }
 
+.bless-button--nav {
+    background: lighten(@color-neutral, 5%);
+}
+
+/* Animations */
 @keyframes loading-spinner {
     0% {
         transform: rotate(0deg);

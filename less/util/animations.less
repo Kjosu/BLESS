@@ -1,41 +1,9 @@
-.anim-right-to-left {
-    &:before {
-        position: absolute;
-        content: "";
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 100%;
-        background: @color-secondary;
-        z-index: -1;
-        transform: rotate(0deg);
-        transition: all 0.2s ease;
-    }
+@import '../mixins/animations';
 
-    &:hover {
-        &:before {
-            left: 0;
-        }
-    }
+.anim-right-to-left {
+    .mx-anim-right-to-left();
 }
 
 .anim-left-to-right {
-    &:before {
-        position: absolute;
-        content: "";
-        top: 0;
-        right: 100%;
-        bottom: 0;
-        left: 0;
-        background: @color-secondary;
-        z-index: -1;
-        transform: rotate(0deg);
-        transition: all 0.2s ease;
-    }
-
-    &:hover {
-        &:before {
-            right: 0;
-        }
-    }
+    .mx-anim-left-to-right();
 }

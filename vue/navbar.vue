@@ -4,7 +4,7 @@
             {{ title }}
             <span class="subtext p-xs-0_5">{{ subTitle }}</span>
         </div>
-        <div class="navbar__items fill-v">
+        <div class="navbar__items fill-v hide-on-xsmall-down">
             <bless-button
                 v-for="(item, index) in items"
                 :key="index"

@@ -59,9 +59,9 @@ export default {
     computed: {
         rootClasses() {
             return {
-                'vue-input--disabled': this.disabled,
-                'vue-input--focused': this.focused,
-                'vue-input--filled': this.isFilled
+                'bless-input--disabled': this.disabled,
+                'bless-input--focused': this.focused,
+                'bless-input--filled': this.isFilled
             };
         },
         isFilled() {

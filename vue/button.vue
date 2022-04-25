@@ -7,7 +7,9 @@
         :disabled="isDisabled"
         @click="click">
         <i v-if="showIcon" class="bless-button__icon" :class="iconClasses" />
-        <div v-if="showLabel" class="bless-button__label" v-html="label" />
+        <div v-if="showLabel" class="bless-button__label">
+            {{ label }}
+        </div>
     </component>
 </template>
 <script>

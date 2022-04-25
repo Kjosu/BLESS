@@ -1,0 +1,52 @@
+.bless-input {
+    position: relative;
+    display: flex;
+    background-color: #ffffff22;
+    height: 3rem;
+}
+
+.bless-input__input {
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    padding: 1rem 1rem 0.1rem;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: white;
+    width: 100%;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.bless-input__label {
+    position: absolute;
+    top: 50%;
+    left: 0.5rem;
+    color: white;
+    padding-left: 0.5rem;
+    transform: translateY(-50%);
+    transition: top .2s ease;
+    pointer-events: none;
+
+    .bless-input--focused &,
+    .bless-input--filled & {
+        top: 0.8rem;
+        font-size: 0.7rem;
+    }
+}
+
+.bless-input__button {
+    padding: 0.5rem 1rem;
+    margin: 0;
+    border: none;
+    background: white;
+    color: black;
+    height: 100%;
+    cursor: pointer;
+
+    &:hover {
+        background: lighten(white, 10%);
+    }
+}

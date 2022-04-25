@@ -4,6 +4,7 @@
             {{ title }}
             <span class="subtext p-xs-0_5">{{ subTitle }}</span>
         </div>
+        <bless-input placeholder="Suche" :button-props="{ icon: 'fa-magnifying-glass' }" />
         <div class="navbar__items fill-v hide-on-xsmall-down">
             <bless-button
                 v-for="(item, index) in items"
@@ -20,10 +21,12 @@
 </template>
 
 <script>
+import blessInput from './input.vue';
 import blessButton from './button.vue';
 
 export default {
     components: {
+        blessInput,
         blessButton
     },
     props: {

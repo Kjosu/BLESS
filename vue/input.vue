@@ -2,10 +2,11 @@
     <div class="bless-input" :class="rootClasses">
         <input
             :id="id"
-            :value="modelValue"
+            :value="value"
             :type="type"
             :name="name"
             :disabled="disabled"
+            :placeholder="computedPlaceholder"
             class="bless-input__input"
             @focus="onFocus"
             @blur="onBlur"
@@ -45,6 +46,8 @@ export default {
         name: String,
         label: String,
         disabled: Boolean,
+        placeholder: String,
+        hidePlaceholderOnFocus: Boolean,
         buttonProps: {
             type: Object,
             default: () => undefined
@@ -53,7 +56,8 @@ export default {
     emits: ['input', 'focus', 'blur', 'keydown', 'keyup', 'change', 'submit', 'update:modelValue'],
     data() {
         return {
-            focused: false
+            focused: false,
+            value: this.modelValue
         };
     },
     computed: {
@@ -61,11 +65,20 @@ export default {
             return {
                 'bless-input--disabled': this.disabled,
                 'bless-input--focused': this.focused,
-                'bless-input--filled': this.isFilled
+                'bless-input--filled': this.isFilled,
+                'bless-input--no-label': !this.label
             };
         },
         isFilled() {
-            return !!this.modelValue;
+            return !!this.value;
+        },
+        computedPlaceholder() {
+            return this.hidePlaceholderOnFocus && this.focused ? '' : this.placeholder;
+        }
+    },
+    watch: {
+        modelValue(value) {
+            this.value = value;
         }
     },
     methods: {
@@ -78,6 +91,7 @@ export default {
                 value = value.toLowerCase();
             }
 
+            this.value = value;
             this.$emit('update:modelValue', value);
         },
         onSubmit() {
@@ -98,7 +112,7 @@ export default {
             this.$emit('keyup', e);
         },
         onChange() {
-            this.$emit('change', this.modelValue);
+            this.$emit('change', this.value);
         }
     }
 };

@@ -41,11 +41,13 @@ export default {
             return !!this.route;
         },
         rootComponent() {
-            if(this.isLinked) {
+            if (this.isLinked) {
                 return 'a';
-            } else if(this.isRouted) {
+            } else if (this.isRouted) {
                 return 'router-link';
-            } else return 'button';
+            } else {
+                return 'button';
+            }
         },
         rootClasses() {
             const classes = {
@@ -53,7 +55,7 @@ export default {
                 'bless-button--icon-only': this.iconOnly
             };
 
-            if(this.type) {
+            if (this.type) {
                 classes[`bless-button--${this.type}`] = true;
             }
 

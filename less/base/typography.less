@@ -1,0 +1,64 @@
+@import (css) url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+	font-family: 'Roboto', sans-serif;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+	font-size: 3rem;
+}
+
+h2 {
+	font-size: 2.6rem;
+}
+
+h3 {
+	font-size: 2.2rem;
+}
+
+h4 {
+	font-size: 1.8rem;
+}
+
+h5 {
+	font-size: 1.4rem;
+}
+
+.subtext {
+	font-size: 0.8rem;
+	color: lightgray;
+}
+
+.title {
+	font-size: 6rem;
+}
+
+.subtitle {
+	font-size: 1rem;
+}
+
+.build-font-sizes(xs);
+
+@media @small {
+    .build-font-sizes(sm);
+}
+
+@media @medium {
+    .build-font-sizes(md);
+}
+
+@media @large {
+    .build-font-sizes(lg);
+}
+
+/* Functions */
+.build-font-sizes(@prefix) {
+    each(@font-sizes, {
+        @selectorValue: replace(~'@{value}', '\.', '_');
+
+        .fs-@{prefix}-@{selectorValue}  { font-size: ~'@{value}rem'; }
+    });
+}

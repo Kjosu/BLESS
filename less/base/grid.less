@@ -1,0 +1,36 @@
+/* Usage */
+.row {
+    display: flex;
+    flex-flow: wrap;
+    width: 100%;
+}
+
+.build-cols(xs);
+
+@media @small {
+    .build-cols(sm);
+}
+
+@media @medium {
+    .build-cols(md);
+}
+
+@media @large {
+    .build-cols(lg);
+}
+
+/* Functions */
+.build-cols(@prefix, @i: 1) when (@i <= @columns) {
+    @size: (100% / @columns * @i);
+
+    .col-@{prefix}-@{i} {
+        flex-basis: @size;
+        max-width: @size;
+    }
+
+    .col-@{prefix}-offset-@{i} {
+        margin-left: @size;
+    }
+
+    .build-cols(@prefix, @i + 1);
+}

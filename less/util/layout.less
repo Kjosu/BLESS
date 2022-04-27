@@ -1,0 +1,78 @@
+.body--navbar {
+    height: calc(100vh - @navbar-height);
+
+    .page {
+        margin-top: @navbar-height;
+    }
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    @media @large {
+        width: 1280px;
+        margin: 0 auto;
+    }
+}
+
+.fill-h {
+	width: 100%;
+}
+
+.fill-v {
+	height: 100%;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-block {
+    text-align: justify;
+}
+
+.hide-on-small-down {
+
+    @media @small-max {
+        display: none;
+    }
+}
+
+.hide-on-small-up {
+    @media @medium {
+        display: none;
+    }
+}
+
+.hide-on-xsmall-down {
+
+    @media @xsmall-max {
+        display: none;
+    }
+}
+
+.hide-on-xsmall-up {
+    @media @small {
+        display: none;
+    }
+}

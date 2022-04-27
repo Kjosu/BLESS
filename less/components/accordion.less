@@ -1,0 +1,16 @@
+.bless-accordion {
+    background: @color-neutral;
+    overflow: hidden;
+}
+
+.bless-accordion__title {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.bless-accordion__content {
+    will-change: height;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}

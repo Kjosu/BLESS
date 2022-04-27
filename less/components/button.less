@@ -1,0 +1,71 @@
+/* Block */
+.bless-button {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    height: 40px;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+    background: @color-primary;
+    color: #f4f4f4;
+    z-index: 1;
+    overflow: hidden;
+
+    &:hover {
+        background: lighten(@color-primary, 5%);
+        text-decoration: none;
+    }
+
+    &:active:hover {
+        background: darken(#4E944F, 10%);
+    }
+
+    &:disabled {
+        cursor: default;
+        background: lighten(#4E944F, 20%);
+    }
+}
+
+/* Elements */
+.bless-button__label {
+    text-align: center;
+}
+
+.bless-button__icon {
+    margin-right: 0.8rem;
+}
+
+/* Modifiers */
+.bless-button--icon-only {
+    .bless-button__icon {
+        margin-right: 0;
+    }
+}
+
+.bless-button--is-loading {
+    justify-content: center;
+
+    .bless-button__icon {
+        margin-right: 0;
+        animation: loading-spinner 1s infinite linear;
+    }
+}
+
+.bless-button--nav {
+    background: lighten(@color-neutral, 5%);
+}
+
+/* Animations */
+@keyframes loading-spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

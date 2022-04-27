@@ -1,0 +1,49 @@
+.mx-anim-right-to-left(@defaultColor: @color-primary, @hoverColor: @color-secondary) {
+    position: relative;
+    background: @defaultColor;
+
+    &:before {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 100%;
+        background: @hoverColor;
+        z-index: -1;
+        transition: left @transition-duration ease;
+    }
+
+    &:hover {
+        background: @defaultColor;
+
+        &:before {
+            left: 0;
+        }
+    }
+}
+
+.mx-anim-left-to-right(@defaultColor: @color-primary, @hoverColor: @color-secondary) {
+    position: relative;
+    background: @defaultColor;
+
+    &:before {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 100%;
+        bottom: 0;
+        left: 0;
+        background: @hoverColor;
+        z-index: -1;
+        transition: right @transition-duration ease;
+    }
+
+    &:hover {
+        background: @defaultColor;
+
+        &:before {
+            right: 0;
+        }
+    }
+}

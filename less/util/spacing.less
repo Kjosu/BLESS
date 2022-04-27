@@ -1,0 +1,47 @@
+/**
+    Create padding and margin classes, for all declared sizes in @spacings, in rem, for all viewports.
+
+    Examples for padding value "0.5" in "xs" viewport:
+
+        .p-xs-0_5 {
+            padding: 0.5rem;
+        }
+ */
+
+/* Usage */
+.build-spacing(xs);
+
+@media @small {
+    .build-spacing(sm);
+}
+
+@media @medium {
+    .build-spacing(md);
+}
+
+@media @large {
+    .build-spacing(lg);
+}
+
+/* Functions */
+.build-spacing(@prefix) {
+    each(@spacings, {
+        @selectorValue: replace(~'@{value}', '\.', '_');
+
+        .p-@{prefix}-@{selectorValue}  { padding: ~'@{value}rem'; }
+        .pt-@{prefix}-@{selectorValue} { padding-top: ~'@{value}rem'; }
+        .pr-@{prefix}-@{selectorValue} { padding-right: ~'@{value}rem'; }
+        .pb-@{prefix}-@{selectorValue} { padding-bottom: ~'@{value}rem'; }
+        .pl-@{prefix}-@{selectorValue} { padding-left: ~'@{value}rem'; }
+        .ph-@{prefix}-@{selectorValue} { padding-left: ~'@{value}rem'; padding-right: ~'@{value}rem'; }
+        .pv-@{prefix}-@{selectorValue} { padding-top: ~'@{value}rem'; padding-bottom: ~'@{value}rem'; }
+
+        .m-@{prefix}-@{selectorValue}  { margin: ~'@{value}rem'; }
+        .mt-@{prefix}-@{selectorValue} { margin-top: ~'@{value}rem'; }
+        .mr-@{prefix}-@{selectorValue} { margin-right: ~'@{value}rem'; }
+        .mb-@{prefix}-@{selectorValue} { margin-bottom: ~'@{value}rem'; }
+        .ml-@{prefix}-@{selectorValue} { margin-left: ~'@{value}rem'; }
+        .mh-@{prefix}-@{selectorValue} { margin-left: ~'@{value}rem'; margin-right: ~'@{value}rem'; }
+        .mv-@{prefix}-@{selectorValue} { margin-top: ~'@{value}rem'; margin-bottom: ~'@{value}rem'; }
+    });
+}

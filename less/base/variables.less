@@ -1,0 +1,50 @@
+/* Colors */
+@color-primary: #4e944f;
+@color-secondary: #b60094;
+@color-neutral: #212121;
+
+@color-text-light: white;
+@color-text-dark: @color-neutral;
+@color-text-disabled: lighten(@color-neutral, 20%);
+
+/* Screen sizes */
+@xs-min: 480px;
+@sm-min: 768px;
+@md-min: 992px;
+@lg-min: 1280px;
+
+@xs-max: @sm-min - 1px;
+@sm-max: @md-min - 1px;
+@md-max: @lg-min - 1px;
+
+/* Media queries */
+@xsmall: ~'only screen and (min-width: @{xs-min})';
+@small: ~'only screen and (min-width: @{sm-min})';
+@medium: ~'only screen and (min-width: @{md-min})';
+@large: ~'only screen and (min-width: @{lg-min})';
+
+@xsmall-max: ~'only screen and (max-width: @{xs-max})';
+@small-max: ~'only screen and (max-width: @{sm-max})';
+@medium-max: ~'only screen and (max-width: @{md-max})';
+
+@xsmall-only: ~'only screen and (min-width: @{xs-min}) and (max-width: @{xs-max})';
+@small-only: ~'only screen and (min-width: @{sm-min}) and (max-width: @{sm-max})';
+@medium-only: ~'only screen and (min-width: @{md-min}) and (max-width: @{md-max})';
+@large-only: @large;
+
+/* Grid */
+@columns: 12;
+
+/* Spacing */
+@spacings: 0, 0.5, 1, 2, 4, 8, 12;
+
+/* Font sizes */
+@font-sizes: 0.5, 0.8, 1, 1.5, 2;
+
+/* Transition durations */
+@transition-duration: .2s;
+@transition-duration-short: .1s;
+@transition-duration-long: .8s;
+
+/* Navbar size */
+@navbar-height: 80px;

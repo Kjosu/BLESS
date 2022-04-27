@@ -5,6 +5,7 @@
         :class="rootClasses"
         :href="link"
         :disabled="isDisabled"
+        :to="route"
         @click="click">
         <i v-if="showIcon" class="bless-button__icon" :class="iconClasses" />
         <div v-if="showLabel" class="bless-button__label">
@@ -25,7 +26,8 @@ export default {
         icon: String,
         iconModifier: String,
         isLoading: Boolean,
-        type: String
+        type: String,
+        route: String
     },
     emits: ['click'],
     computed: {
@@ -35,8 +37,15 @@ export default {
         isLinked() {
             return !!this.link;
         },
+        isRouted() {
+            return !!this.route;
+        },
         rootComponent() {
-            return this.isLinked ? 'a' : 'button';
+            if(this.isLinked) {
+                return 'a';
+            } else if(this.isRouted) {
+                return 'router-link';
+            } else return 'button';
         },
         rootClasses() {
             const classes = {

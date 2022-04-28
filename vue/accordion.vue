@@ -1,6 +1,7 @@
 <template>
     <div class="bless-accordion">
         <div class="bless-accordion__title" @click="toggle">
+            <i v-if="showIcon" class="bless-accordion__icon" :class="iconClasses" />
             {{ title }}
         </div>
         <transition
@@ -18,6 +19,12 @@
 export default {
     props: {
         title: String,
+        iconType: {
+            type: String,
+            default: 'fas'
+        },
+        icon: String,
+        iconModifier: String,
         expanded: Boolean
     },
     emits: ['toggle'],
@@ -29,6 +36,12 @@ export default {
     computed: {
         content() {
             return this.$refs.content;
+        },
+        showIcon() {
+            return !!this.icon;
+        },
+        iconClasses() {
+            return [this.iconType, this.iconModifier, this.icon];
         }
     },
     methods: {

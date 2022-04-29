@@ -10,7 +10,10 @@
         @click="click"
         @dragstart="onDragStart"
         @drag="onDrag"
-        @dragend="onDragEnd">
+        @dragend="onDragEnd"
+        @touchstart="onTouchStart"
+        @touchmove="onTouchMove"
+        @touchend="onTouchEnd">
         <i v-if="showIcon" class="bless-button__icon" :class="iconClasses" />
         <div v-if="showLabel" class="bless-button__label">
             {{ label }}
@@ -33,7 +36,7 @@ export default {
         type: String,
         route: String
     },
-    emits: ['click', 'dragstart', 'drag', 'dragend'],
+    emits: ['click', 'touchstart', 'touchmove', 'touchend', 'dragstart', 'drag', 'dragend'],
     computed: {
         isDisabled() {
             return this.disabled || this.isLoading;
@@ -94,6 +97,15 @@ export default {
         },
         onDragEnd(e) {
             this.$emit('dragend', e);
+        },
+        onTouchStart(e) {
+            this.$emit('touchstart', e);
+        },
+        onTouchMove(e) {
+            this.$emit('touchmove', e);
+        },
+        onTouchEnd(e) {
+            this.$emit('touchend', e);
         }
     }
 };

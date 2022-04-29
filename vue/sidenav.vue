@@ -14,7 +14,10 @@
             @click="toggle"
             @dragstart="onDragStart"
             @drag.prevent="onDrag"
-            @dragend="onDragEnd" />
+            @dragend="onDragEnd"
+            @touchstart="onDragStart"
+            @touchmove.prevent="onDrag"
+            @touchend="onDragEnd" />
         <div class="bless-sidenav__content">
             <slot />
         </div>
@@ -71,11 +74,16 @@ export default {
                 return;
             }
 
-            e.dataTransfer.setDragImage(antiDragImage, 0, 0);
-            e.dataTransfer.dropEffect = 'none';
-            e.dataTransfer.effectAllowed = 'move';
+            if (e instanceof TouchEvent) {
+                this.dragStartX = e.changedTouches[0].pageX;
+            } else {
+                e.dataTransfer.setDragImage(antiDragImage, 0, 0);
+                e.dataTransfer.dropEffect = 'none';
+                e.dataTransfer.effectAllowed = 'move';
 
-            this.dragStartX = e.pageX;
+                this.dragStartX = e.pageX;
+            }
+
             this.x = this.open ? 1 : 0;
             this.dragging = true;
         },
@@ -84,7 +92,9 @@ export default {
                 return;
             }
 
-            const diffX = (this.open ? -1 : 1) * (e.pageX - this.dragStartX);
+            const x = (e instanceof TouchEvent) ? e.changedTouches[0].pageX : e.pageX;
+
+            const diffX = (this.open ? -1 : 1) * (x - this.dragStartX);
             const diffXClamped = Math.max(Math.min(diffX, this.$el.clientWidth), 0);
 
             this.x = diffXClamped / this.$el.clientWidth;

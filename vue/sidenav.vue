@@ -35,13 +35,14 @@ export default {
     },
     props: {
         title: String,
+        initialState: String,
         buttonProps: Object,
         draggable: Boolean,
         keepToggleOutside: Boolean
     },
     data() {
         return {
-            open: false,
+            open: this.initialState === 'open',
             dragging: false,
             dragStartX: 0,
             x: 0

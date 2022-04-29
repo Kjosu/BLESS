@@ -1,5 +1,5 @@
 <template>
-    <div class="bless-input" :class="rootClasses">
+    <div class="bless-input" :class="rootClasses" v-bind="$props">
         <input
             :id="id"
             :value="value"

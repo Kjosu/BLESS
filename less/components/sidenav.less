@@ -1,0 +1,48 @@
+.bless-sidenav {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    background-color: @color-neutral;
+    transition: transform @transition-duration ease-in-out;
+    width: 250px;
+}
+
+.bless-sidenav--open {
+    transform: translateX(0);
+
+    .bless-sidenav-toggle {
+        transform: translateX(0);
+
+        .bless-button__icon {
+            transform: rotateY(180deg);
+        }
+    }
+}
+
+.bless-sidenav--open.bless-sidenav--keep-toggle-outside {
+    .bless-sidenav-toggle {
+        transform: translateX(100%);
+    }
+}
+
+.bless-sidenav-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(100%);
+    transition: transform @transition-duration ease-in-out;
+
+    .bless-button__icon {
+        transition: transform .5s ease-in-out;
+    }
+}
+
+.bless-sidenav__title {
+    width: 100%;
+}
+
+.bless-sidenav__content {
+    width: 100%;
+    height: 100%;
+}

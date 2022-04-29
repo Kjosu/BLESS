@@ -6,7 +6,11 @@
         :href="link"
         :disabled="isDisabled"
         :to="route"
-        @click="click">
+        v-bind="$props"
+        @click="click"
+        @dragstart="onDragStart"
+        @drag="onDrag"
+        @dragend="onDragEnd">
         <i v-if="showIcon" class="bless-button__icon" :class="iconClasses" />
         <div v-if="showLabel" class="bless-button__label">
             {{ label }}
@@ -29,7 +33,7 @@ export default {
         type: String,
         route: String
     },
-    emits: ['click'],
+    emits: ['click', 'dragstart', 'drag', 'dragend'],
     computed: {
         isDisabled() {
             return this.disabled || this.isLoading;
@@ -81,6 +85,15 @@ export default {
             }
 
             this.$emit('click');
+        },
+        onDragStart(e) {
+            this.$emit('dragstart', e);
+        },
+        onDrag(e) {
+            this.$emit('drag', e);
+        },
+        onDragEnd(e) {
+            this.$emit('dragend', e);
         }
     }
 };

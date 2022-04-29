@@ -10,17 +10,21 @@
 
 /* Usage */
 .build-spacing(xs);
+.build-reset(xs);
 
 @media @small {
     .build-spacing(sm);
+    .build-reset(sm);
 }
 
 @media @medium {
     .build-spacing(md);
+    .build-reset(md);
 }
 
 @media @large {
     .build-spacing(lg);
+    .build-reset(lg);
 }
 
 /* Functions */
@@ -33,15 +37,34 @@
         .pr-@{prefix}-@{selectorValue} { padding-right: ~'@{value}rem'; }
         .pb-@{prefix}-@{selectorValue} { padding-bottom: ~'@{value}rem'; }
         .pl-@{prefix}-@{selectorValue} { padding-left: ~'@{value}rem'; }
-        .ph-@{prefix}-@{selectorValue} { padding-left: ~'@{value}rem'; padding-right: ~'@{value}rem'; }
-        .pv-@{prefix}-@{selectorValue} { padding-top: ~'@{value}rem'; padding-bottom: ~'@{value}rem'; }
+        .ph-@{prefix}-@{selectorValue} { padding-inline: ~'@{value}rem'; }
+        .pv-@{prefix}-@{selectorValue} { padding-block: ~'@{value}rem'; }
 
         .m-@{prefix}-@{selectorValue}  { margin: ~'@{value}rem'; }
         .mt-@{prefix}-@{selectorValue} { margin-top: ~'@{value}rem'; }
         .mr-@{prefix}-@{selectorValue} { margin-right: ~'@{value}rem'; }
         .mb-@{prefix}-@{selectorValue} { margin-bottom: ~'@{value}rem'; }
         .ml-@{prefix}-@{selectorValue} { margin-left: ~'@{value}rem'; }
-        .mh-@{prefix}-@{selectorValue} { margin-left: ~'@{value}rem'; margin-right: ~'@{value}rem'; }
-        .mv-@{prefix}-@{selectorValue} { margin-top: ~'@{value}rem'; margin-bottom: ~'@{value}rem'; }
+        .mh-@{prefix}-@{selectorValue} { margin-inline: ~'@{value}rem'; }
+        .mv-@{prefix}-@{selectorValue} { margin-block: ~'@{value}rem'; }
     });
+}
+
+.build-reset(@prefix) {
+
+    .res-p-@{prefix}  { padding: 0; }
+    .res-pt-@{prefix} { padding-top: 0; }
+    .res-pr-@{prefix} { padding-right: 0; }
+    .res-pb-@{prefix} { padding-bottom: 0; }
+    .res-pl-@{prefix} { padding-left: 0; }
+    .res-ph-@{prefix} { padding-inline: 0; }
+    .res-pv-@{prefix} { padding-block: 0; }
+
+    .res-m-@{prefix}  { margin: 0; }
+    .res-mt-@{prefix} { margin-top: 0; }
+    .res-mr-@{prefix} { margin-right: 0; }
+    .res-mb-@{prefix} { margin-bottom: 0; }
+    .res-ml-@{prefix} { margin-left: 0; }
+    .res-mh-@{prefix} { margin-inline: 0; }
+    .res-mv-@{prefix} { margin-block: 0; }
 }

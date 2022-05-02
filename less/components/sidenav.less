@@ -1,37 +1,150 @@
 .bless-sidenav {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    transform: translateX(-100%);
     background-color: @color-neutral;
     transition: transform @transition-duration ease-in-out;
     width: 250px;
     z-index: 500;
+
+    &--left {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+
+        .bless-sidenav-toggle {
+            top: 0;
+            right: 0;
+            transform: translateX(100%);
+        }
+    }
+
+    &--right {
+        top: 0;
+        bottom: 0;
+        right: 0;
+        transform: translateX(100%);
+
+        .bless-sidenav-toggle {
+            top: 0;
+            left: 0;
+            transform: translateX(-100%);
+
+            .bless-button__icon {
+                transform: rotateY(180deg);
+            }
+        }
+    }
+
+    &--top {
+        left: 0;
+        right: 0;
+        top: 0;
+        width: 100%;
+        transform: translateY(-100%);
+
+        .bless-sidenav-toggle {
+            bottom: 0;
+            right: 0;
+            transform: translateY(100%);
+        }
+    }
+
+    &--bottom {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        transform: translateY(100%);
+
+        .bless-sidenav-toggle {
+            top: 0;
+            transform: translateY(-100%);
+
+            .bless-button__icon {
+                transform: rotate(180deg);
+            }
+        }
+    }
 }
 
 .bless-sidenav--open {
-    transform: translateX(0);
+    transform: translateX(0) translateY(0);
 
-    .bless-sidenav-toggle {
-        transform: translateX(0);
+    &.bless-sidenav--left {
+        .bless-sidenav-toggle {
+            transform: translateX(0);
 
-        .bless-button__icon {
-            transform: rotateY(180deg);
+            .bless-button__icon {
+                transform: rotateY(180deg);
+            }
+        }
+    }
+
+    &.bless-sidenav--right {
+        .bless-sidenav-toggle {
+            transform: translateX(0);
+
+            .bless-button__icon {
+                transform: rotateY(0deg);
+            }
+        }
+    }
+
+    &.bless-sidenav--top {
+        .bless-sidenav-toggle {
+            transform: translateY(0);
+
+            .bless-button__icon {
+                transform: rotateX(180deg);
+            }
+        }
+    }
+
+    &.bless-sidenav--bottom {
+        .bless-sidenav-toggle {
+            .bless-button__icon {
+                transform: rotateY(180deg);
+            }
         }
     }
 }
 
 .bless-sidenav--open.bless-sidenav--keep-toggle-outside {
-    .bless-sidenav-toggle {
-        transform: translateX(100%);
+    &.bless-sidenav--left {
+        .bless-sidenav-toggle {
+            transform: translateX(100%);
+        }
+    }
+
+    &.bless-sidenav--right {
+        .bless-sidenav-toggle {
+            transform: translateX(-100%);
+        }
+    }
+
+    &.bless-sidenav--top {
+        .bless-sidenav-toggle {
+            transform: translateY(100%);
+        }
+    }
+
+    &.bless-sidenav--bottom {
+        .bless-sidenav-toggle {
+            transform: translateY(0);
+        }
+    }
+}
+
+.bless-sidenav--keep-toggle-outside {
+    &.bless-sidenav--bottom {
+        .bless-sidenav__title {
+            margin: 0 0 0 45px;
+        }
     }
 }
 
 .bless-sidenav-toggle {
     position: absolute;
-    top: 0;
-    right: 0;
-    transform: translateX(100%);
     transition: transform @transition-duration ease-in-out;
 
     .bless-button__icon {
@@ -42,9 +155,16 @@
 .bless-sidenav__title {
     display: flex;
     align-items: center;
-    width: 100%;
     height: 40px;
-    padding: 0 45px 0 1rem;
+    padding: 0.5rem;
+
+    .bless-sidenav--left & {
+        margin: 0 45px 0 0;
+    }
+
+    .bless-sidenav--right & {
+        margin: 0 0 0 45px;
+    }
 }
 
 .bless-sidenav__content {

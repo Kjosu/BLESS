@@ -9,7 +9,7 @@
         <bless-button
             v-bind="buttonProps"
             class="bless-sidenav-toggle"
-            icon="fa-arrow-right"
+            :icon="toggleIcon"
             :draggable="draggable"
             @click="toggle"
             @dragstart="onDragStart"
@@ -38,32 +38,72 @@ export default {
         initiallyOpened: Boolean,
         buttonProps: Object,
         draggable: Boolean,
-        keepToggleOutside: Boolean
+        keepToggleOutside: Boolean,
+        side: {
+            type: String,
+            default: 'left',
+            validator: (val) => ['left', 'right', 'top', 'bottom'].indexOf(val) !== -1
+        }
     },
     data() {
         return {
             open: this.initiallyOpened,
             dragging: false,
-            dragStartX: 0,
-            x: 0
+            dragStart: {
+                x: 0,
+                y: 0
+            },
+            transform: {
+                x: 0,
+                y: 0
+            }
         };
     },
     computed: {
         rootClasses() {
-            return {
-                'bless-sidenav--open': this.open,
-                'bless-sidenav--keep-toggle-outside': this.keepToggleOutside
-            };
+            return [
+                `bless-sidenav--${this.side}`,
+                {
+                    'bless-sidenav--open': this.open,
+                    'bless-sidenav--keep-toggle-outside': this.keepToggleOutside
+                }
+            ];
         },
         rootStyle() {
             if (!this.dragging) {
                 return;
             }
 
+            let x = 0, y = 0;
+
+            switch (this.side) {
+                case 'left':
+                    x = -(this.open ? this.transform.x : (1 - this.transform.x));
+                    break;
+                case 'right':
+                    x = this.open ? this.transform.x : 1 - this.transform.x;
+                    break;
+                case 'top':
+                    y = this.open ? -this.transform.y : -(1 - this.transform.y);
+                    break;
+                case 'bottom':
+                    y = this.open ? this.transform.y : 1 - this.transform.y;
+                    break;
+            }
+
             return {
-                transform: `translateX(-${100 - this.x * 100}%)`,
+                transform: `translate(${x * 100}%, ${y * 100}%)`,
                 transition: 'none'
             };
+        },
+        swipeAxis() {
+            return this.side === 'left' || this.side === 'right' ? 'x' : 'y';
+        },
+        isNegativeAxis() {
+            return this.side === 'left' || this.side === 'top';
+        },
+        toggleIcon() {
+            return this.swipeAxis === 'x' ? 'fa-arrow-right' : 'fa-arrow-down';
         }
     },
     methods: {
@@ -76,16 +116,31 @@ export default {
             }
 
             if (e instanceof TouchEvent) {
-                this.dragStartX = e.changedTouches[0].pageX;
+                this.dragStart = {
+                    x: e.changedTouches[0].pageX,
+                    y: e.changedTouches[0].pageY
+                };
+
+                // iOS swipe navigation fix
+                if (this.dragStart.x <= 10 || this.dragStart.x >= window.innerWidth - 10) {
+                    return;
+                } else {
+                    e.preventDefault();
+                }
             } else {
                 e.dataTransfer.setDragImage(antiDragImage, 0, 0);
                 e.dataTransfer.dropEffect = 'none';
                 e.dataTransfer.effectAllowed = 'move';
 
-                this.dragStartX = e.pageX;
+                this.dragStart = {
+                    x: e.pageX,
+                    y: e.pageY
+                };
             }
 
-            this.x = this.open ? 1 : 0;
+            this.transform.x = 0;
+            this.transform.y = 0;
+
             this.dragging = true;
         },
         onDrag(e) {
@@ -93,24 +148,45 @@ export default {
                 return;
             }
 
-            const x = (e instanceof TouchEvent) ? e.changedTouches[0].pageX : e.pageX;
+            const diff = {};
 
-            const diffX = (this.open ? -1 : 1) * (x - this.dragStartX);
-            const diffXClamped = Math.max(Math.min(diffX, this.$el.clientWidth), 0);
-
-            this.x = diffXClamped / this.$el.clientWidth;
-
-            if (this.open) {
-                this.x = 1 - this.x;
+            // Get coordinates
+            if (e instanceof TouchEvent) {
+                diff.x = e.changedTouches[0].pageX;
+                diff.y = e.changedTouches[0].pageY;
+            } else {
+                diff.x = e.pageX;
+                diff.y = e.pageY;
             }
+
+            const swap = this.isNegativeAxis ? this.open : !this.open;
+
+            // Get difference
+            diff.x = swap ? this.dragStart.x - diff.x : diff.x - this.dragStart.x;
+            diff.y = swap ? this.dragStart.y - diff.y : diff.y - this.dragStart.y;
+
+            // Clamp
+            diff.x = Math.max(Math.min(diff.x, this.$el.clientWidth), 0);
+            diff.y = Math.max(Math.min(diff.y, this.$el.clientHeight), 0);
+
+            // Make percentage
+            diff.x /= this.$el.clientWidth;
+            diff.y /= this.$el.clientHeight;
+
+            this.transform.x = diff.x;
+            this.transform.y = diff.y;
+
+            console.log(this.transform);
         },
         onDragEnd() {
             if (!this.dragging) {
                 return;
             }
 
-            this.open = this.x > (this.open ? 0.75 : 0.25);
-            this.dragStartX = 0;
+            const transformValue = this.swipeAxis === 'x' ? this.transform.x : this.transform.y;
+
+            this.open = transformValue > 0.25 ? !this.open : this.open;
+            this.dragStart = { x: 0, y: 0 };
             this.dragging = false;
         }
     }

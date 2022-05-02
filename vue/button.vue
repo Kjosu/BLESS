@@ -37,6 +37,11 @@ export default {
         route: String
     },
     emits: ['click', 'touchstart', 'touchmove', 'touchend', 'dragstart', 'drag', 'dragend'],
+    data() {
+        return {
+            touchMoving: false
+        };
+    },
     computed: {
         isDisabled() {
             return this.disabled || this.isLoading;
@@ -99,13 +104,19 @@ export default {
             this.$emit('dragend', e);
         },
         onTouchStart(e) {
+            this.touchMoving = false;
             this.$emit('touchstart', e);
         },
         onTouchMove(e) {
+            this.touchMoving = true;
             this.$emit('touchmove', e);
         },
         onTouchEnd(e) {
             this.$emit('touchend', e);
+
+            if (!this.touchMoving) {
+                this.$emit('click', e);
+            }
         }
     }
 };

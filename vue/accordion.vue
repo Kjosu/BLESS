@@ -1,5 +1,5 @@
 <template>
-    <div class="bless-accordion">
+    <div class="bless-accordion" :class="rootClasses">
         <div class="bless-accordion__title" @click="toggle">
             <i v-if="showIcon" class="bless-accordion__icon" :class="iconClasses" />
             {{ title }}
@@ -42,6 +42,11 @@ export default {
         },
         iconClasses() {
             return [this.iconType, this.iconModifier, this.icon];
+        },
+        rootClasses() {
+            return {
+                'bless-accordion--expanded': this.expanded
+            };
         }
     },
     methods: {

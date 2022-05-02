@@ -175,8 +175,6 @@ export default {
 
             this.transform.x = diff.x;
             this.transform.y = diff.y;
-
-            console.log(this.transform);
         },
         onDragEnd() {
             if (!this.dragging) {

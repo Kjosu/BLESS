@@ -8,29 +8,33 @@
 @color-text-disabled: lighten(@color-neutral, 20%);
 
 /* Screen sizes */
-@xs-min: 480px;
-@sm-min: 768px;
-@md-min: 992px;
-@lg-min: 1280px;
+@xs-min: 0px;
+@sm-min: 600px;
+@md-min: 960px;
+@lg-min: 1264px;
+@xlg-min: 1904px;
 
 @xs-max: @sm-min - 1px;
 @sm-max: @md-min - 1px;
 @md-max: @lg-min - 1px;
+@lg-max: @xlg-min - 1px;
 
 /* Media queries */
-@xsmall: ~'only screen and (min-width: @{xs-min})';
 @small: ~'only screen and (min-width: @{sm-min})';
 @medium: ~'only screen and (min-width: @{md-min})';
 @large: ~'only screen and (min-width: @{lg-min})';
+@xlarge: ~'only screen and (min-width: @{xlg-min})';
 
 @xsmall-max: ~'only screen and (max-width: @{xs-max})';
 @small-max: ~'only screen and (max-width: @{sm-max})';
 @medium-max: ~'only screen and (max-width: @{md-max})';
+@large-max: ~'only screen and (max-width: @{lg-max})';
 
-@xsmall-only: ~'only screen and (min-width: @{xs-min}) and (max-width: @{xs-max})';
+@xsmall-only: @xsmall-max;
 @small-only: ~'only screen and (min-width: @{sm-min}) and (max-width: @{sm-max})';
 @medium-only: ~'only screen and (min-width: @{md-min}) and (max-width: @{md-max})';
-@large-only: @large;
+@large-only: ~'only screen and (min-width: @{lg-min}) and (max-width: @{lg-max})';
+@xlarge-only: @xlarge;
 
 /* Grid */
 @columns: 12;

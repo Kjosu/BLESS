@@ -1,12 +1,12 @@
 <template>
     <div class="bless-input">
-        <div v-if="prependOuter" class="bless-input__prepend-outer">
+        <div v-if="prependOuter" class="bless-input__prepend-outer" @click="handleClick($event, prependOuter)">
             <div class="bless-input__icon bless-input__icon--prepend">
                 <bless-icon v-bind="mapProp(prependOuter)" />
             </div>
         </div>
         <div class="bless-input__control">
-            <div v-if="prependInner" class="bless-input__prepend-inner">
+            <div v-if="prependInner" class="bless-input__prepend-inner" @click="handleClick($event, prependInner)">
                 <div class="bless-input__icon bless-input__icon--prepend">
                     <bless-icon v-bind="mapProp(prependInner)" />
                 </div>
@@ -14,13 +14,13 @@
             <div class="bless-input__slot">
                 <slot />
             </div>
-            <div v-if="appendInner" class="bless-input__append-inner">
+            <div v-if="appendInner" class="bless-input__append-inner" @click="handleClick($event, appendInner)">
                 <div class="bless-input__icon bless-input__icon--append">
                     <bless-icon v-bind="mapProp(appendInner)" />
                 </div>
             </div>
         </div>
-        <div v-if="appendOuter" class="bless-input__append-outer">
+        <div v-if="appendOuter" class="bless-input__append-outer" @click="handleClick($event, appendOuter)">
             <div class="bless-input__icon bless-input__icon--append">
                 <bless-icon v-bind="mapProp(appendOuter)" />
             </div>
@@ -55,6 +55,15 @@ export default {
     methods: {
         mapProp(prop) {
             return prop instanceof Object ? prop : { icon: prop };
+        },
+        handleClick(e, prop) {
+            if (!(prop instanceof Object)) {
+                return;
+            }
+
+            if (prop.click) {
+                prop.click(e);
+            }
         }
     }
 };

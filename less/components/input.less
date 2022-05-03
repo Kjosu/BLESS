@@ -1,72 +1,19 @@
 /* Block */
 .bless-input {
-    position: relative;
     display: flex;
-    background-color: @color-neutral;
     height: 3rem;
 }
 
 /* Elements */
-.bless-input__input {
-    border: none;
-    border-radius: 0;
-    background: transparent;
-    padding: 1rem 1rem 0.1rem;
-    line-height: 1.6;
-    font-size: 1rem;
-    color: @color-text-light;
-    width: 100%;
-
-    &::placeholder {
-        color: @color-text-light;
-        opacity: 1;
-    }
-
-    &:focus {
-        outline: none;
-    }
-}
-
-.bless-input__label {
-    position: absolute;
-    top: 50%;
-    left: 0.5rem;
-    color: @color-text-light;
-    padding-left: 0.5rem;
-    transform: translateY(-50%);
-    transition: top .2s ease;
-    pointer-events: none;
-}
-
-.bless-input__button {
-    padding: 1rem 1.5rem;
-    height: 100%;
+.bless-input__control {
+    display: flex;
     background-color: @color-neutral;
-
-    &:hover {
-        background-color: @color-neutral;
-    }
-
-    &:active:hover {
-        background-color: @color-neutral;
-    }
-
-    &:disabled {
-        cursor: default;
-        background-color: @color-neutral;
-        color: @color-text-disabled;
-    }
 }
 
-/* Modifiers */
-.bless-input--focused .bless-input__label,
-.bless-input--filled .bless-input__label {
-    top: 0.8rem;
-    font-size: 0.7rem;
-}
-
-.bless-input--no-label {
-    .bless-input__input {
-        padding: 0.5rem 1rem;
-    }
+.bless-input__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 100%;
 }

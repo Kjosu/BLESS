@@ -1,8 +1,11 @@
 export default {
     props: {
-        modelValue: {}
+        id: String,
+        label: String,
+        modelValue: {},
+        disabled: Boolean
     },
-    emits: ['update:modelValue'],
+    emits: ['update:modelValue', 'focus', 'blur'],
     data() {
         return {
             lazyValue: this.modelValue,
@@ -12,8 +15,10 @@ export default {
     computed: {
         rootClasses() {
             return {
+                'bless-input--disabled': this.disabled,
                 'bless-input--focused': this.isFocused,
-                'bless-input--filled': this.isFilled
+                'bless-input--filled': this.isFilled,
+                'bless-input--no-label': !this.label
             };
         },
         internalValue: {
@@ -38,11 +43,13 @@ export default {
         onInput(e) {
             this.internalValue = e.target.value;
         },
-        onFocus() {
+        onFocus(e) {
             this.isFocused = true;
+            this.$emit('focus', e);
         },
-        onBlur() {
+        onBlur(e) {
             this.isFocused = false;
+            this.$emit('blur', e);
         }
     }
 };

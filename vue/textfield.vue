@@ -32,12 +32,13 @@ export default {
     mixins: [inputMixin],
     props: {
         placeholder: String,
-        hidePlaceholderOnFocus: Boolean
+        hidePlaceholderOnFocus: Boolean,
+        name: String
     },
     emits: ['keydown', 'keyup', 'change', 'submit'],
     computed: {
         computedPlaceholder() {
-            return this.hidePlaceholderOnFocus && this.focused ? '' : this.placeholder;
+            return this.hidePlaceholderOnFocus && this.isFocused ? '' : this.placeholder;
         }
     },
     methods: {

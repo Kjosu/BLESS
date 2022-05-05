@@ -1,5 +1,9 @@
 <template>
-    <bless-input-wrapper v-bind="$props" :class="rootClasses" class="bless-input--textfield">
+    <bless-input-wrapper
+        v-bind="$props"
+        :dropdown="showAutocomplete"
+        :class="rootClasses"
+        class="bless-input--textfield">
         <div class="bless-textfield">
             <label class="bless-textfield__label">
                 {{ label }}
@@ -12,13 +16,23 @@
                 :name="name"
                 :disabled="disabled"
                 :placeholder="computedPlaceholder"
-                @focus="onFocus"
-                @blur="onBlur"
                 @keydown.enter="onSubmit"
                 @keydown="onKeyDown"
                 @keyup="onKeyUp"
-                @change="onChange">
+                @change="onChange"
+                @focus="onFocus"
+                @blur="onBlur">
         </div>
+        <template #dropdown>
+            <div
+                v-for="(item, index) in autocompleteItems"
+                :key="index"
+                class="bless-textfield__autocomplete-item"
+                @click="onAutocomplete(item)"
+                @mousedown.prevent>
+                {{ item }}
+            </div>
+        </template>
     </bless-input-wrapper>
 </template>
 <script>
@@ -33,12 +47,19 @@ export default {
     props: {
         placeholder: String,
         hidePlaceholderOnFocus: Boolean,
-        name: String
+        name: String,
+        autocompleteItems: {
+            type: Array,
+            default: undefined
+        }
     },
     emits: ['keydown', 'keyup', 'change', 'submit'],
     computed: {
         computedPlaceholder() {
             return this.hidePlaceholderOnFocus && this.isFocused ? '' : this.placeholder;
+        },
+        showAutocomplete() {
+            return this.autocompleteItems && this.autocompleteItems.length > 0 && this.isFocused;
         }
     },
     methods: {
@@ -53,6 +74,9 @@ export default {
         },
         onChange() {
             this.$emit('change', this.value);
+        },
+        onAutocomplete(item) {
+            this.internalValue = item;
         }
     }
 };

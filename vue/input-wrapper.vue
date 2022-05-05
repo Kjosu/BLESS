@@ -19,6 +19,9 @@
                     <bless-icon v-bind="mapProp(appendInner)" />
                 </div>
             </div>
+            <div v-if="dropdown" class="bless-input__dropdown">
+                <slot name="dropdown" />
+            </div>
         </div>
         <div v-if="appendOuter" class="bless-input__append-outer" @click="handleClick($event, appendOuter)">
             <div class="bless-input__icon bless-input__icon--append">
@@ -50,7 +53,8 @@ export default {
         appendInner: {
             type: [Object, String],
             default: undefined
-        }
+        },
+        dropdown: Boolean
     },
     methods: {
         mapProp(prop) {

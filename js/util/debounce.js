@@ -1,4 +1,4 @@
-const debounce = function(f, threshold) {
+const debounce = function(f, threshold, callback, context) {
     let timeoutId;
 
     return function(...params) {
@@ -8,7 +8,11 @@ const debounce = function(f, threshold) {
 
         timeoutId = setTimeout(() => {
             timeoutId = undefined;
-            f(...params);
+            const result = f.apply(context, params);
+
+            if (result && callback) {
+                callback(result);
+            }
         }, threshold);
     };
 };

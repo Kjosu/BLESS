@@ -8,7 +8,7 @@ const debounce = function(f, threshold, callback, context) {
 
         timeoutId = setTimeout(() => {
             timeoutId = undefined;
-            const result = f.apply(context, params);
+            const result = f.apply(context || this, params);
 
             if (result && callback) {
                 callback(result);

@@ -36,7 +36,7 @@
     </bless-input-wrapper>
 </template>
 <script>
-import inputMixin from './mixins/input-mixin';
+import inputMixin from '../mixins/input-mixin';
 import blessInputWrapper from './input-wrapper';
 
 export default {

@@ -24,7 +24,7 @@
     </div>
 </template>
 <script>
-import blessButton from './button';
+import blessButton from './inputs/button';
 
 const antiDragImage = document.createElement('div');
 antiDragImage.classList.add('anti-drag-image');

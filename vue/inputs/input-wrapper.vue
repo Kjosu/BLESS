@@ -31,7 +31,7 @@
     </div>
 </template>
 <script>
-import blessIcon from './icon';
+import blessIcon from '../icon';
 
 export default {
     components: {

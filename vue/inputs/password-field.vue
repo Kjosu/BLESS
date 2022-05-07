@@ -1,17 +1,17 @@
 <template>
     <bless-input-wrapper
         v-bind="$props"
-        :dropdown="showAutocomplete"
         :class="rootClasses"
-        class="bless-input--textfield">
-        <div class="bless-textfield">
+        class="bless-input--password"
+        :append-inner="inputIcon">
+        <div class="bless-textfield bless-textfield--password">
             <label class="bless-textfield__label">
                 {{ label }}
             </label>
             <input
                 :id="id"
                 v-model="internalValue"
-                type="text"
+                :type="inputType"
                 class="bless-textfield__input"
                 :name="name"
                 :disabled="disabled"
@@ -23,16 +23,6 @@
                 @focus="onFocus"
                 @blur="onBlur">
         </div>
-        <template #dropdown>
-            <div
-                v-for="(item, index) in autocompleteItems"
-                :key="index"
-                class="bless-textfield__autocomplete-item"
-                @click="onAutocomplete(item)"
-                @mousedown.prevent>
-                {{ item }}
-            </div>
-        </template>
     </bless-input-wrapper>
 </template>
 <script>
@@ -46,19 +36,29 @@ export default {
     },
     mixins: [inputMixin, placeholderMixin],
     props: {
-        name: String,
-        autocompleteItems: {
-            type: Array,
-            default: undefined
-        }
+        name: String
     },
     emits: ['keydown', 'keyup', 'change', 'submit'],
+    data() {
+        return {
+            showPassword: false
+        };
+    },
     computed: {
-        showAutocomplete() {
-            return this.autocompleteItems && this.autocompleteItems.length > 0 && this.isFocused;
+        inputType() {
+            return this.showPassword ? 'text' : 'password';
+        },
+        inputIcon() {
+            return {
+                icon: this.showPassword ? 'fa-eye' : 'fa-eye-slash',
+                click: this.toggle
+            };
         }
     },
     methods: {
+        toggle() {
+            this.showPassword = !this.showPassword;
+        },
         onSubmit() {
             this.$emit('submit');
         },
@@ -69,10 +69,7 @@ export default {
             this.$emit('keyup', e);
         },
         onChange() {
-            this.$emit('change', this.value);
-        },
-        onAutocomplete(item) {
-            this.internalValue = item;
+            this.$emit('change', this.internalValue);
         }
     }
 };

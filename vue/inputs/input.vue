@@ -118,7 +118,7 @@ export default {
 };
 </script>
 <style scoped lang="less">
-@import 'src/bless/less/base/variables';
+@import '../../less/base/variables';
 
 /* Block */
 .bless-input {

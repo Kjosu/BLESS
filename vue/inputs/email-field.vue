@@ -12,7 +12,7 @@
                 v-model="internalValue"
                 type="email"
                 class="bless-textfield__input"
-                :name="name"
+                :name="computedName"
                 :disabled="disabled"
                 :placeholder="computedPlaceholder"
                 @keydown.enter="onSubmit"
@@ -34,9 +34,6 @@ export default {
         blessInputWrapper
     },
     mixins: [inputMixin, placeholderMixin],
-    props: {
-        name: String
-    },
     emits: ['keydown', 'keyup', 'change', 'submit'],
     methods: {
         onSubmit() {

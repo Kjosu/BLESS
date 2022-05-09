@@ -1,6 +1,9 @@
+import camelize from '../../js/util/camelize';
+
 export default {
     props: {
         id: String,
+        name: String,
         label: String,
         modelValue: {},
         disabled: Boolean
@@ -29,6 +32,9 @@ export default {
                 this.lazyValue = value;
                 this.$emit('update:modelValue', value);
             }
+        },
+        computedName() {
+            return this.name || camelize(this.label);
         },
         isFilled() {
             return !!this.internalValue;

@@ -12,7 +12,7 @@
                 v-model="internalValue"
                 type="text"
                 class="bless-textfield__input"
-                :name="name"
+                :name="computedName"
                 :disabled="disabled"
                 :placeholder="computedPlaceholder"
                 @keydown.enter="onSubmit"
@@ -34,14 +34,11 @@ export default {
         blessInputWrapper
     },
     mixins: [inputMixin, placeholderMixin],
-    props: {
-        name: String
-    },
     emits: ['keydown', 'keyup', 'change', 'submit'],
     watch: {
         internalValue(newValue, oldValue) {
             if (!newValue) return;
-            
+
             if (isNaN(newValue) || isNaN(parseFloat(newValue))) {
                 this.internalValue = oldValue;
             }

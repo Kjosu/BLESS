@@ -13,7 +13,7 @@
                 v-model="internalValue"
                 type="text"
                 class="bless-textfield__input"
-                :name="getName"
+                :name="computedName"
                 :disabled="disabled"
                 :placeholder="computedPlaceholder"
                 @keydown.enter="onSubmit"
@@ -46,7 +46,6 @@ export default {
     },
     mixins: [inputMixin, placeholderMixin],
     props: {
-        name: String,
         autocompleteItems: {
             type: Array,
             default: undefined
@@ -54,9 +53,6 @@ export default {
     },
     emits: ['keydown', 'keyup', 'change', 'submit'],
     computed: {
-        getName() {
-            return this.name || this.camelize(this.label);
-        },
         showAutocomplete() {
             return this.autocompleteItems && this.autocompleteItems.length > 0 && this.isFocused;
         }
@@ -76,9 +72,6 @@ export default {
         },
         onAutocomplete(item) {
             this.internalValue = item;
-        },
-        camelize(str) {
-            return str?.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
         }
     }
 };

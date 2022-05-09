@@ -3,18 +3,22 @@
 </template>
 <script>
 import textField from './textfield';
+import numberField from './number-field';
 import passwordField from './password-field';
+import emailField from './email-field';
 
 export default {
     components: {
         textField,
-        passwordField
+        passwordField,
+        numberField,
+        emailField
     },
     props: {
         type: {
             type: String,
             default: 'text',
-            validator: (value) => ['text', 'password'].indexOf(value) !== -1
+            validator: (value) => ['text', 'password', 'number', 'email'].indexOf(value) !== -1
         }
     },
     computed: {
@@ -22,6 +26,10 @@ export default {
             switch (this.type) {
                 case 'password':
                     return passwordField;
+                case 'number':
+                    return numberField;
+                case 'email':
+                    return emailField;
                 default:
                     return textField;
             }

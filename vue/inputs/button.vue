@@ -77,7 +77,7 @@ export default {
             return [this.iconType, this.iconModifier, this.isLoading ? 'fa-spinner' : this.icon];
         },
         showLabel() {
-            return this.label && !this.isLoading;
+            return !!this.label;
         },
         showIcon() {
             return this.icon || this.isLoading;

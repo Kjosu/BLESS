@@ -88,7 +88,7 @@ export default {
     },
     methods: {
         click(e) {
-            if (this.isLinked) {
+            if (this.isLinked || !window.matchMedia('(hover: hover)').matches) {
                 return;
             }
 

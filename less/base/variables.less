@@ -12,18 +12,18 @@
 @sm-min: 600px;
 @md-min: 960px;
 @lg-min: 1264px;
-@xlg-min: 1904px;
+@xl-min: 1904px;
 
 @xs-max: @sm-min - 1px;
 @sm-max: @md-min - 1px;
 @md-max: @lg-min - 1px;
-@lg-max: @xlg-min - 1px;
+@lg-max: @xl-min - 1px;
 
 /* Media queries */
 @small: ~'only screen and (min-width: @{sm-min})';
 @medium: ~'only screen and (min-width: @{md-min})';
 @large: ~'only screen and (min-width: @{lg-min})';
-@xlarge: ~'only screen and (min-width: @{xlg-min})';
+@xlarge: ~'only screen and (min-width: @{xl-min})';
 
 @xsmall-max: ~'only screen and (max-width: @{xs-max})';
 @small-max: ~'only screen and (max-width: @{sm-max})';
@@ -51,4 +51,10 @@
 @transition-duration-long: .8s;
 
 /* Navbar size */
-@navbar-height: 70px;
+@navbar-total-height: {
+    xs: 70px;
+    sm: 70px;
+    md: 70px;
+    lg: 70px;
+    xl: 70px;
+}

@@ -5,6 +5,27 @@
     width: 250px;
     z-index: 500;
 
+    &--fixed {
+        position: fixed;
+        top: @navbar-total-height[xs];
+
+        @media @small {
+            top: @navbar-total-height[sm];
+        }
+
+        @media @medium {
+            top: @navbar-total-height[md];
+        }
+
+        @media @large {
+            top: @navbar-total-height[lg];
+        }
+
+        @media @xlarge {
+            top: @navbar-total-height[xl];
+        }
+    }
+
     &--left {
         top: 0;
         bottom: 0;

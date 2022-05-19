@@ -87,12 +87,12 @@ export default {
         }
     },
     methods: {
-        click() {
+        click(e) {
             if (this.isLinked) {
                 return;
             }
 
-            this.$emit('click');
+            this.$emit('click', e);
         },
         onDragStart(e) {
             this.$emit('dragstart', e);

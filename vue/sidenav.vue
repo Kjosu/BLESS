@@ -39,6 +39,7 @@ export default {
         buttonProps: Object,
         draggable: Boolean,
         keepToggleOutside: Boolean,
+        fixed: Boolean,
         side: {
             type: String,
             default: 'left',
@@ -65,7 +66,8 @@ export default {
                 `bless-sidenav--${this.side}`,
                 {
                     'bless-sidenav--open': this.open,
-                    'bless-sidenav--keep-toggle-outside': this.keepToggleOutside
+                    'bless-sidenav--keep-toggle-outside': this.keepToggleOutside,
+                    'bless-sidenav--fixed': this.fixed
                 }
             ];
         },
@@ -108,6 +110,7 @@ export default {
     },
     methods: {
         toggle() {
+            console.log('toggle');
             this.open = !this.open;
         },
         onDragStart(e) {
